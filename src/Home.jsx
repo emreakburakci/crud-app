@@ -26,22 +26,17 @@ const Home = () => {
           {/* Endpoint to route to Home component */}
           <Link to="/home">Home</Link>
         </li>
-        <li>
-          {/* Endpoint to route to Home component */}
-          <Link to="/">Login</Link>
-        </li>
+
         <li>
           {/* Endpoint to route to ListEmployees component */}
           <Link to="/listEmployees">List Employees</Link>
         </li>
+
         <li>
-          {/* Endpoint to route to About component */}
-          <Link to="/about">About</Link>
+          {/* Endpoint to route to CreateEmployee component */}
+          <Link to="/createEmployee">Create Employee</Link>
         </li>
-        <li>
-          {/* Endpoint to route to Contact Us component */}
-          <Link to="/contactus">Contact Us</Link>
-        </li>
+
         <li>
           {/* Endpoint to route to Contact Us component */}
           <Link to="/logout">Logout</Link>
