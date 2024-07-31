@@ -21,6 +21,8 @@ import CreateEmployee from "./CreateEmployee";
 
 import UpdateEmployee from "./UpdateEmployee";
 
+import Pyomo from "./Pyomo";
+
 function App() {
   return (
     <>
@@ -38,6 +40,8 @@ function App() {
           <Route path="/createEmployee" element={<CreateEmployee />} />
 
           <Route path="/updateEmployee" element={<UpdateEmployee />} />
+
+          <Route path="/pyomo" element={<Pyomo />} />
 
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>

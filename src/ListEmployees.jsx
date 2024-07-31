@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { Row, Col, Table, Button } from "react-bootstrap";
+import "./ListEmployees.css";
+import Layout from "./Layout";
 
 const ListEmployees = () => {
   const navigate = useNavigate();
@@ -54,58 +56,57 @@ const ListEmployees = () => {
   }, []);
 
   return (
-    <div>
-      <table>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Email</th>
-            <th>Department</th>
-          </tr>
-        </thead>
-        <tbody>
-          {employees.map((employee) => (
-            <tr key={employee.id}>
-              <td>{employee.id}</td>
-              <td>{employee.firstName}</td>
-              <td>{employee.lastName}</td>
-              <td>{employee.emailId}</td>
-              <td>{employee.department.name}</td>
-              <td>
-                <button onClick={() => deleteEmployee(employee.id)}>
-                  Delete
-                </button>
-              </td>
-              <td>
-                <button onClick={() => updateEmployee(employee)}>Update</button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-      <ul>
-        <li>
-          {/* Endpoint to route to Home component */}
-          <Link to="/home">Home</Link>
-        </li>
+    <Layout>
+      <Row className="mb-4">
+        <Col>
+          <h2 className="text-center">Employee List</h2>
+        </Col>
+      </Row>
 
-        <li>
-          {/* Endpoint to route to ListEmployees component */}
-          <Link to="/listEmployees">List Employees</Link>
-        </li>
-        <li>
-          {/* Endpoint to route to CreateEmployee component */}
-          <Link to="/createEmployee">Create Employee</Link>
-        </li>
-
-        <li>
-          {/* Endpoint to route to Contact Us component */}
-          <Link to="/logout">Logout</Link>
-        </li>
-      </ul>
-    </div>
+      <Row>
+        <Col>
+          <Table striped bordered hover>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Department</th>
+              </tr>
+            </thead>
+            <tbody>
+              {employees.map((employee) => (
+                <tr key={employee.id}>
+                  <td>{employee.id}</td>
+                  <td>{employee.firstName}</td>
+                  <td>{employee.lastName}</td>
+                  <td>{employee.emailId}</td>
+                  <td>{employee.department.name}</td>
+                  <td>
+                    <Button
+                      variant="primary"
+                      size="sm"
+                      className="me-2"
+                      onClick={() => updateEmployee(employee)}
+                    >
+                      Edit
+                    </Button>
+                    <Button
+                      variant="danger"
+                      size="sm"
+                      onClick={() => deleteEmployee(employee.id)}
+                    >
+                      Delete
+                    </Button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+        </Col>
+      </Row>
+    </Layout>
   );
 };
 

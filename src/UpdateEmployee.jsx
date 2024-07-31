@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { Link } from "react-router-dom";
-
+import { Form, Button } from "react-bootstrap";
+import Layout from "./Layout";
 const UpdateEmployee = () => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -33,7 +33,7 @@ const UpdateEmployee = () => {
       ...employee,
       id: employee.id,
       firstName: firstNameRef.current.value,
-      email: emailRef.current.value,
+      emailId: emailRef.current.value,
       lastName: lastNameRef.current.value,
     };
     try {
@@ -54,64 +54,41 @@ const UpdateEmployee = () => {
   };
 
   return (
-    <div>
+    <Layout>
       <h1>Update Employee</h1>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="name">Name:</label>
-          <input
+      <Form onSubmit={handleSubmit}>
+        <Form.Group className="mb-3" controlId="formFirstName">
+          <Form.Label>First Name</Form.Label>
+          <Form.Control
             type="text"
-            id="name"
-            name="name"
-            defaultValue={employee.firstName}
+            defaultValue={employee?.firstName}
             ref={firstNameRef}
+            placeholder="Enter first name"
           />
-        </div>
-        <div>
-          <label htmlFor="lastName">Last Name:</label>
-          <input
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="formLastName">
+          <Form.Label>Last Name</Form.Label>
+          <Form.Control
             type="text"
-            id="lastName"
-            name="lastName"
-            defaultValue={employee.lastName}
+            defaultValue={employee?.lastName}
             ref={lastNameRef}
+            placeholder="Enter last name"
           />
-        </div>
-
-        <div>
-          <label htmlFor="email">Email:</label>
-          <input
-            type="text"
-            id="email"
-            name="email"
-            defaultValue={employee.emailId}
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="formEmail">
+          <Form.Label>Email</Form.Label>
+          <Form.Control
+            type="email"
+            defaultValue={employee?.emailId}
             ref={emailRef}
+            placeholder="Enter email"
           />
-        </div>
-        <button type="submit">Update Employee</button>
-      </form>
-      <ul>
-        <li>
-          {/* Endpoint to route to Home component */}
-          <Link to="/home">Home</Link>
-        </li>
-
-        <li>
-          {/* Endpoint to route to ListEmployees component */}
-          <Link to="/listEmployees">List Employees</Link>
-        </li>
-
-        <li>
-          {/* Endpoint to route to CreateEmployee component */}
-          <Link to="/createEmployee">Create Employee</Link>
-        </li>
-
-        <li>
-          {/* Endpoint to route to Contact Us component */}
-          <Link to="/logout">Logout</Link>
-        </li>
-      </ul>
-    </div>
+        </Form.Group>
+        <Button variant="primary" type="submit">
+          Update
+        </Button>
+      </Form>
+    </Layout>
   );
 };
 

@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
 
+import { Button, Form } from "react-bootstrap";
+import Layout from "./Layout";
 const CreateEmployee = () => {
   const navigate = useNavigate();
   useEffect(() => {
@@ -51,52 +52,41 @@ const CreateEmployee = () => {
   };
 
   return (
-    <div>
-      <h1>Create Employee</h1>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          value={firstName}
-          onChange={(e) => setFirstName(e.target.value)}
-          placeholder="First Name"
-        />
-        <input
-          type="text"
-          value={lastName}
-          onChange={(e) => setLastName(e.target.value)}
-          placeholder="Last Name"
-        />
-        <input
-          type="email"
-          value={emailId}
-          onChange={(e) => setEmailId(e.target.value)}
-          placeholder="Email"
-        />
-
-        <button type="submit">Create Employee</button>
-      </form>
-      <ul>
-        <li>
-          {/* Endpoint to route to Home component */}
-          <Link to="/home">Home</Link>
-        </li>
-
-        <li>
-          {/* Endpoint to route to ListEmployees component */}
-          <Link to="/listEmployees">List Employees</Link>
-        </li>
-
-        <li>
-          {/* Endpoint to route to CreateEmployee component */}
-          <Link to="/createEmployee">Create Employee</Link>
-        </li>
-
-        <li>
-          {/* Endpoint to route to Contact Us component */}
-          <Link to="/logout">Logout</Link>
-        </li>
-      </ul>
-    </div>
+    <Layout>
+      <h1>Add Employee</h1>
+      <Form onSubmit={handleSubmit}>
+        <Form.Group className="mb-3" controlId="formFirstName">
+          <Form.Label>First Name</Form.Label>
+          <Form.Control
+            type="text"
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
+            placeholder="Enter first name"
+          />
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="formLastName">
+          <Form.Label>Last Name</Form.Label>
+          <Form.Control
+            type="text"
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
+            placeholder="Enter last name"
+          />
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="formEmail">
+          <Form.Label>Email</Form.Label>
+          <Form.Control
+            type="email"
+            value={emailId}
+            onChange={(e) => setEmailId(e.target.value)}
+            placeholder="Enter email"
+          />
+        </Form.Group>
+        <Button variant="primary" type="submit">
+          Submit
+        </Button>
+      </Form>
+    </Layout>
   );
 };
 

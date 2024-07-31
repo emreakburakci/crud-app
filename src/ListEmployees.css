@@ -1,0 +1,16 @@
+.Container {
+  margin-top: 50px;
+}
+
+h2 {
+  font-weight: 300;
+  color: #333;
+}
+
+.Table {
+  margin-top: 20px;
+}
+
+.Button {
+  margin-right: 5px;
+}

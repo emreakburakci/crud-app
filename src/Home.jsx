@@ -1,16 +1,13 @@
 import React from "react";
-// Importing Link from react-router-dom to
-// navigate to different end points.
-import { Link } from "react-router-dom";
-// Importing useNavigate from react-router-dom
-// to navigate to different end points.
+
 import { useNavigate } from "react-router-dom";
-// import use effect
 import { useEffect } from "react";
+
+import Layout from "./Layout";
 const Home = () => {
   const navigate = useNavigate();
   useEffect(() => {
-    console.log("ListEmployees:: Token is", localStorage.getItem("token"));
+    console.log("Home:: Token is", localStorage.getItem("token"));
     if (localStorage.getItem("token") === null) {
       console.log("If entered Token is null");
       navigate("/");
@@ -18,31 +15,9 @@ const Home = () => {
   }, []);
 
   return (
-    <div>
+    <Layout>
       <h1>Home Page</h1>
-      <br />
-      <ul>
-        <li>
-          {/* Endpoint to route to Home component */}
-          <Link to="/home">Home</Link>
-        </li>
-
-        <li>
-          {/* Endpoint to route to ListEmployees component */}
-          <Link to="/listEmployees">List Employees</Link>
-        </li>
-
-        <li>
-          {/* Endpoint to route to CreateEmployee component */}
-          <Link to="/createEmployee">Create Employee</Link>
-        </li>
-
-        <li>
-          {/* Endpoint to route to Contact Us component */}
-          <Link to="/logout">Logout</Link>
-        </li>
-      </ul>
-    </div>
+    </Layout>
   );
 };
 
