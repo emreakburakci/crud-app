@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { Row, Col, Table, Button } from "react-bootstrap";
+import { Row, Col, Table, Button, Pagination } from "react-bootstrap";
 import "./ListEmployees.css";
 import Layout from "./Layout";
 
 const ListEmployees = () => {
   const navigate = useNavigate();
+  const [employees, setEmployees] = useState([]);
+  const [page, setPage] = useState(0); // Add state for page
+  const [size, setSize] = useState(5); // Add state for size
+  const token = localStorage.getItem("token");
   useEffect(() => {
     console.log("ListEmployees:: Token is", localStorage.getItem("token"));
     if (localStorage.getItem("token") === null) {
@@ -14,18 +18,18 @@ const ListEmployees = () => {
       navigate("/");
     }
   }, []);
-  const [employees, setEmployees] = useState([]);
-  const token = localStorage.getItem("token");
+
   const fetchEmployees = async () => {
     const config = {
       headers: { Authorization: `Bearer ${token}` },
+      params: { page, size },
     };
     try {
       const response = await axios.get(
         "http://95.214.177.98:8080/security/employee/getAllEmployees",
         config
       );
-      setEmployees(response.data);
+      setEmployees(response.data.content);
     } catch (error) {
       console.error("Error fetching employees:", error);
     }
@@ -53,7 +57,7 @@ const ListEmployees = () => {
 
   useEffect(() => {
     fetchEmployees();
-  }, []);
+  }, [page, size]);
 
   return (
     <Layout>
@@ -104,6 +108,17 @@ const ListEmployees = () => {
               ))}
             </tbody>
           </Table>
+        </Col>
+      </Row>
+      <Row>
+        <Col>
+          <Pagination>
+            <Pagination.Prev
+              onClick={() => setPage((old) => Math.max(old - 1, 0))}
+            />
+            <Pagination.Item>{page + 1}</Pagination.Item>
+            <Pagination.Next onClick={() => setPage((old) => old + 1)} />
+          </Pagination>
         </Col>
       </Row>
     </Layout>
